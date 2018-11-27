@@ -1,0 +1,151 @@
+/* Sidebar custom */
+#sidebarnav li.selected ul.first-level li.active{
+    background-color: #28b779;
+}
+
+/* Validate Change Password */
+#password_validate .error{
+    color: #da542e;
+}
+
+#password_validate input.error{
+    border-color: #da542e;
+}
+
+#password_validate .valid{
+    color: #28b779;
+}
+
+#password_validate input.valid{
+    border-color: #28b779;
+}
+
+/* Validate Add Category */
+#add_category .error{
+    color: #da542e;
+}
+
+#add_category input.error, #add_category textarea.error{
+    border-color: #da542e;
+}
+
+#add_category .valid{
+    color: #28b779;
+}
+
+#add_category input.valid, #add_category textarea.valid{
+    border-color: #28b779;
+}
+
+#add_category .select2{
+    width: 100%;
+}
+
+#add_category .select2-selection{
+    border-color: #28b779;
+    color: #28b779;
+    line-height: 40px;
+}
+
+#add_category .select2-selection__rendered{
+    color: #28b779;
+}
+
+/* Validate Edit Category */
+#edit_category .error{
+    color: #da542e;
+}
+
+#edit_category input.error, #edit_category textarea.error{
+    border-color: #da542e;
+}
+
+#edit_category .valid{
+    color: #28b779;
+}
+
+#edit_category input.valid, #edit_category textarea.valid{
+    border-color: #28b779;
+}
+
+#edit_category .select2{
+    width: 100%;
+}
+
+#edit_category .select2-selection{
+    border-color: #28b779;
+    color: #28b779;
+    line-height: 40px;
+}
+
+#edit_category .select2-selection__rendered{
+    color: #28b779;
+}
+
+/* Validate Add Product */
+#add_product .error{
+    color: #da542e;
+}
+
+#add_product input.error, #add_product textarea.error{
+    border-color: #da542e;
+}
+
+#add_product .valid{
+    color: #28b779;
+}
+
+#add_product input.valid, #add_product textarea.valid{
+    border-color: #28b779;
+}
+
+#add_product .select2{
+    width: 100%;
+}
+
+#add_product .select2-selection{
+    border-color: #28b779;
+    color: #28b779;
+    line-height: 40px;
+}
+
+#add_product .select2-selection__rendered{
+    color: #28b779;
+}
+
+/* Validate Edit Product */
+#edit_product .error{
+    color: #da542e;
+}
+
+#edit_product input.error, #edit_product textarea.error{
+    border-color: #da542e;
+}
+
+#edit_product .valid{
+    color: #28b779;
+}
+
+#edit_product input.valid, #edit_product textarea.valid{
+    border-color: #28b779;
+}
+
+#edit_product .select2{
+    width: 100%;
+}
+
+#edit_product .select2-selection{
+    border-color: #28b779;
+    color: #28b779;
+    line-height: 40px;
+}
+
+#edit_product .select2-selection__rendered{
+    color: #28b779;
+}
+
+form.dropzone{
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
