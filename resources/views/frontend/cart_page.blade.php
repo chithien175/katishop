@@ -17,7 +17,9 @@
                             <div class="cart_item_image"><img src="{{ asset('frontend/images/shopping_cart.jpg') }}" alt=""></div>
                             <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                 <div class="cart_item_name cart_info_col">
-                                    <div class="cart_item_text">MacBook Air 13</div>
+                                    <a class="cart_item_text" href="#">
+                                        MacBook Air 13
+                                    </a>
                                 </div>
                                 <div class="cart_item_price cart_info_col">
                                     <div class="cart_item_text">$2000</div>

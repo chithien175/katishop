@@ -114,8 +114,16 @@
 }
 .cart_item_text
 {
-	font-size: 18px;
-	margin-top: 35px;
+	color: #242424;
+	font-size: 14px;
+    margin-bottom: 7px;
+    line-height: 20px;
+    font-weight: 400;
+    padding-top: 0;
+}
+.cart_item_text:hover
+{
+	color: #007ff0;
 }
 .cart_item_text span
 {
