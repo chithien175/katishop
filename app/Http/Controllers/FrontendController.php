@@ -95,9 +95,6 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function postAddCart(Request $request){
-        // echo "<pre>";
-        // print_r($request->all());
-        // echo "</pre>";
         $cart = new Cart;
         $cart->product_id = $request['product_id'];
         $cart->attribute_id = $request['attribute_id'];
@@ -116,7 +113,14 @@ class FrontendController extends Controller
         if($cart->save()){
             return redirect()->back();
         }
+    }
 
-        
+    /*
+    |--------------------------------------------------------------------------
+    | GET Cart
+    |--------------------------------------------------------------------------
+    */
+    public function getCart(){
+        return view('frontend.cart_page');
     }
 }

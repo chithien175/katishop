@@ -75,7 +75,7 @@
                                     <div class="cart_count"><span>10</span></div>
                                 </div>
                                 <div class="cart_content">
-                                    <div class="cart_text"><a href="#">Giỏ hàng</a></div>
+                                    <div class="cart_text"><a href="{{ route('get.cart') }}">Giỏ hàng</a></div>
                                     <div class="cart_price">2.000.000 ₫</div>
                                 </div>
                             </div>

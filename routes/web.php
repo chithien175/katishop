@@ -67,3 +67,6 @@ Route::get('/get-attribute', 'FrontendController@getProductAttribute')->name('ge
 
 // Add to card
 Route::post('/add-cart', 'FrontendController@postAddCart')->name('post.add_cart');
+
+// Card route (Frontend)
+Route::get('/cart.html', 'FrontendController@getCart')->name('get.cart');

@@ -226,9 +226,5 @@
         });
 	});
 
-	// Zoom image selected (easyzoomjs)
-	// $( document ).ready(function() {
-
-	// });
 </script>
 @endsection
