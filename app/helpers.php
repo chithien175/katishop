@@ -1,6 +1,7 @@
 <?php
 use App\Category;
 use App\Product;
+use App\Cart;
 
 function dequyCategories($data,$parent=0){
     if(isset($data[$parent])){
@@ -54,4 +55,26 @@ function ratioDiscountCalculator($price, $price_regular){
         return CEIL($ratio);
     }
     return 0;
+}
+
+function totalItemInCart(){
+    $session_id = Session::get('session_id');
+    $carts = Cart::where('session_id', $session_id)->get();
+    if($carts->count() > 0){
+        return $carts->sum('quantity');
+    }
+    return 0;
+}
+
+function totalPriceInCart(){
+    $session_id = Session::get('session_id');
+    $carts = Cart::where('session_id', $session_id)->get();
+    $total = 0;
+    if($carts->count() > 0){
+        foreach($carts as $cart){
+            $total += $cart->attributes->price*$cart->quantity;
+        }
+        return $total;
+    }
+    return $total;
 }

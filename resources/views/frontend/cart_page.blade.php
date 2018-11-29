@@ -219,9 +219,6 @@
             }
         });
 
-        // Total items
-        var totalItems = {{$totalItems}};
-
         // Delete item from cart
         $('.action .del-cart').click(function(e){
             e.preventDefault();
@@ -241,9 +238,7 @@
                 },
                 success: function(result){
                     if(result.status == 1){
-                        totalItems = totalItems - cartQuantity;
-                        $(obj).closest('li.cart_item').fadeOut( "slow");
-                        $('.cart_title .total_items').html("( "+totalItems+" sản phẩm)");
+                        location.reload();
                     }
                 }
             });

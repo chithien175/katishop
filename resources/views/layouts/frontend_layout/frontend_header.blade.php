@@ -72,11 +72,11 @@
                             <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                 <div class="cart_icon">
                                     <img src="{{ asset('frontend/images/cart.png') }}" alt="">
-                                    <div class="cart_count"><span>10</span></div>
+                                    <div class="cart_count"><span>{{ totalItemInCart() }}</span></div>
                                 </div>
                                 <div class="cart_content">
                                     <div class="cart_text"><a href="{{ route('get.cart') }}">Giỏ hàng</a></div>
-                                    <div class="cart_price">2.000.000 ₫</div>
+                                    <div class="cart_price">{{ number_format(totalPriceInCart(), 0, ',', '.') }} ₫</div>
                                 </div>
                             </div>
                         </div>
