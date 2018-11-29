@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 use App\Product;
 use App\Category;
 use App\ProductAttribute;
@@ -94,24 +95,71 @@ class FrontendController extends Controller
     | POST Add To Cart
     |--------------------------------------------------------------------------
     */
-    public function postAddCart(Request $request){
-        $cart = new Cart;
-        $cart->product_id = $request['product_id'];
-        $cart->attribute_id = $request['attribute_id'];
-        $cart->quantity = $request['quantity'];
-        if($request['user_email']){
-            $cart->user_email = '';
-        }else{
-            $cart->user_email = $request['user_email'];
-        }
-        if($request['session_id']){
-            $cart->session_id = '';
-        }else{
-            $cart->session_id = $request['session_id'];
+    public function postAddItem(Request $request){
+        $session_id = Session::get('session_id');
+        if(empty($session_id)){
+            $session_id = str_random(40);
+            Session::put('session_id', $session_id);
         }
 
-        if($cart->save()){
-            return redirect()->back();
+        // Kiểm tra item đã có trong giỏ hàng chưa
+        $checkItem = Cart::where(['product_id'=>$request['product_id'], 'attribute_id'=>$request['attribute_id'], 'session_id'=>$session_id])->first();
+
+        // Nếu item đã có trong giỏ hàng thì cộng số lượng
+        // Nếu item chưa có trong giỏ hàng thì thêm vào cart
+        if(!empty($checkItem)){
+            $checkItem->quantity = $checkItem->quantity + $request['quantity'];
+            $checkItem->save();
+        }else{
+            $cart = new Cart;
+            $cart->product_id = $request['product_id'];
+            $cart->attribute_id = $request['attribute_id'];
+            $cart->quantity = $request['quantity'];
+            $cart->session_id = $session_id;
+            if($request['user_email']){
+                $cart->user_email = '';
+            }else{
+                $cart->user_email = $request['user_email'];
+            }
+            $cart->save();
+        }
+
+        return redirect()->route('get.cart')->with('flash_message_success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | POST Del Item from Cart
+    |--------------------------------------------------------------------------
+    */
+    public function postDelItem(Request $request){
+        $cart = Cart::findOrFail($request['id']);
+        if($cart->delete()){
+            return response()->json(['status'=> 1]);
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | POST Update quantity Cart
+    |--------------------------------------------------------------------------
+    */
+    public function postUpdateQuantity(Request $request){
+        $cart = Cart::findOrFail($request['id']);
+        if($request['action'] == 'plus'){
+            $cart->quantity = $cart->quantity + $request['quantity'];
+            $cart->save();
+            return response()->json(['status'=> 1]);
+        }
+        if($request['action'] == 'minus'){
+            $cart->quantity = $cart->quantity - $request['quantity'];
+            $cart->save();
+            return response()->json(['status'=> 1]);
+        }
+        if($request['action'] == 'manual' && $request['quantity'] >= 1){
+            $cart->quantity = $request['quantity'];
+            $cart->save();
+            return response()->json(['status'=> 1]);
         }
     }
 
@@ -121,6 +169,14 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function getCart(){
-        return view('frontend.cart_page');
+        $session_id = Session::get('session_id');
+        $userCart = Cart::where('session_id', $session_id)->get();
+        if($userCart->count() > 0){
+            $totalItems = $userCart->sum('quantity');
+        }else{
+            $totalItems = 0;
+        }
+        
+        return view('frontend.cart_page')->withUserCart($userCart)->withTotalItems($totalItems);
     }
 }

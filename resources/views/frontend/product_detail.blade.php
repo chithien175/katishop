@@ -37,7 +37,7 @@
 				<div class="col-lg-4 order-lg-2 order-1">
 				@if(file_exists('images/products/medium/'.$product->image))
 					<div class="image_selected ">
-							<img src="{{ asset('images/products/medium/'.$product->image) }}" alt="{{ $product->name }}">
+						<img src="{{ asset('images/products/medium/'.$product->image) }}" alt="{{ $product->name }}">
 					</div>
 				@else
 					<div class="image_selected"><img src="{{ asset('images/products/default/default.jpg') }}" alt="{{ $product->name }}"></div>
@@ -66,7 +66,7 @@
 						</div>
 						
 						<div class="order_info" style="display: {{ ($firstAttribute->stock == 0)?'none':'block' }};">
-							<form class="form-inline" id="addToCardForm" name="addToCardForm" action="{{ route('post.add_cart') }}" method="post">
+							<form class="form-inline" id="addToCardForm" name="addToCardForm" action="{{ route('post.add_item') }}" method="post">
 								@csrf()
 								<input type="hidden" name="product_id" value="{{ $product->id }}">
 								<input type="hidden" name="attribute_id" value="{{ $firstAttribute->id }}">
@@ -78,11 +78,11 @@
 								<div style="width: 40px;">
 									<div class="form-group">
 										<select class="form-control" id="exampleFormControlSelect1" name="quantity">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
 										</select>
 									</div>
 								</div>

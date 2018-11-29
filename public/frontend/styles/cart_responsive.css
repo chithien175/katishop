@@ -289,6 +289,7 @@
 	.cart_item
 	{
 		padding-bottom: 30px;
+		border-bottom: 1px solid #e8e8e8;
 	}
 	.cart_item_title
 	{
@@ -298,16 +299,24 @@
 	{
 		display: inline-block;
 		font-size: 14px;
-		margin-left: 15px;
+		/* margin-left: 15px; */
 	}
 	.cart_item_price,
 	.cart_item_total
 	{
+		width: 100%;
 		text-align: left;
+	}
+	.cart_item_price .price1, .cart_item_price .price2{
+		margin-top: 0px;
 	}
 	.cart_item_name
 	{
 		margin-left: 0;
+		width: 100%;
+	}
+	.cart_item_quantity{
+		width: 125px;
 	}
 	.cart_info_col
 	{

@@ -60,13 +60,19 @@ Route::get('/', 'FrontendController@homepage')->name('homepage');
 Route::get('/danh-muc/{slug}.html', 'FrontendController@getProductsByCategory')->name('get.products_by_category');
 
 // Show product detail
-Route::get('/{slug}-product{id}.html', 'FrontendController@getProductDetail')->name('get.product_detail')->where(['slug' => '[a-zA-Z-0-9]+', 'id' => '[0-9]*']);
+Route::get('/{slug}-pid{id}.html', 'FrontendController@getProductDetail')->name('get.product_detail')->where(['slug' => '[a-zA-Z-0-9]+', 'id' => '[0-9]*']);
 
 // Get product attribute
 Route::get('/get-attribute', 'FrontendController@getProductAttribute')->name('get.attribute');
 
-// Add to card
-Route::post('/add-cart', 'FrontendController@postAddCart')->name('post.add_cart');
+// Add Item to card
+Route::post('/cart/add-item', 'FrontendController@postAddItem')->name('post.add_item');
+
+// Delete item from card
+Route::post('/cart/del-item', 'FrontendController@postDelItem')->name('post.del_item');
+
+// Update quantity to card
+Route::post('/cart/update-quantity', 'FrontendController@postUpdateQuantity')->name('post.update_quantity');
 
 // Card route (Frontend)
 Route::get('/cart.html', 'FrontendController@getCart')->name('get.cart');
