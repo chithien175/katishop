@@ -48,6 +48,11 @@
                                         Chỉ còn {{ $cart->attributes->stock }} sản phẩm
                                     </div>
                                     @endif
+                                    @if($cart->attributes->stock == 0)
+                                    <div class="stock_status mt-1">
+                                        Sản phẩm đã hết hàng
+                                    </div>
+                                    @endif
                                     <div class="action mt-1">
                                         <a class="del-cart" href="javascript:void(0);" data-item-id="{{ $cart->id }}" data-item-quantity="{{ $cart->quantity }}">Xóa</a>
                                     </div>
@@ -62,7 +67,9 @@
                                     <div class="cart_item_text price2">{{ number_format($price2, 0, ',', '.') }} ₫</div>
                                     <div class="cart_item_text sale">-{{ $sale }}%</div>
                                 </div>
+                                
                                 <div class="input-group cart_item_quantity cart_info_col">
+                                    @if($cart->attributes->stock > 0)
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[{{$key}}]">
                                             <span class="fas fa-minus"></span>
@@ -74,7 +81,9 @@
                                             <span class="fas fa-plus"></span>
                                         </button>
                                     </span>
+                                    @endif
                                 </div>
+                               
                             </div>
                         </li>
                         @endforeach

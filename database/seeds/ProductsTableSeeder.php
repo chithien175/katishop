@@ -35,7 +35,7 @@ class ProductsTableSeeder extends Seeder
                         'sku' => uniqid().'_'.rand(1, 1000000),
                         'name' => $size[$j],
                         'price' => $price-(($j+2)*1000000),
-                        'stock' => rand(10, 50)
+                        'stock' => rand(0, 50)
                     ]);
                 }
             }else{
@@ -45,7 +45,7 @@ class ProductsTableSeeder extends Seeder
                         'sku' => uniqid().'_'.rand(1, 1000000),
                         'name' => $color[$j],
                         'price' => $price-(($j+2)*1000000),
-                        'stock' => rand(10, 50)
+                        'stock' => rand(0, 50)
                     ]);
                 }
             }
