@@ -146,6 +146,10 @@
 	-o-transform: translateY(4px);
 	transform: translateY(4px);
 }
+.stock_status
+{
+	color: #db5246;
+}
 .cart_item_price
 {
 	margin-top: 10px;

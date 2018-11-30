@@ -56,9 +56,10 @@
                         <div class="product_text"><p>{!! $product->description !!}</p></div>
 						<hr>
                         <div class="choose_attribute">
-						<span class="stock_status">
-							Chọn thuộc tính:
-						</span>
+							<div class="stock_status mb-3" style="display: {{ ($firstAttribute->stock > 0 && $firstAttribute->stock <= 5)?'block':'none' }};">
+								Chỉ còn {{ $firstAttribute->stock }} sản phẩm
+							</div>
+							<span>Chọn thuộc tính:</span>
                             @foreach($product->attributes as $attribute)
 								@php $active = ($attribute->id == $firstAttribute->id) ? 'active' : ''; @endphp
                                 <button type="button" data-attribute-id="{{ $attribute->id }}" class="btn btn-sm btn-outline-primary {{ $active }}">{{ $attribute->name }}</button>
@@ -192,12 +193,22 @@
 					$('.product_description .product_price').html(resp.price +' ₫');
 					$('.product_description .price_saleoff').html('<div class="price_saleoff">Tiết kiệm: <span>'+resp.percent+'%</span> ('+resp.price_saleoff+')</div>');
 					$('.product_description .product_sku').html('SKU:'+resp.sku);
+					
+					// Ẩn hiện nút "CHỌN MUA"
 					if(resp.stock == 0){
 						$(".order_info").hide();
 						$(".order_chayhang").show();
 					}else{
 						$(".order_info").show();
 						$(".order_chayhang").hide();
+					}
+
+					// Ẩn hiện thông báo gần hết hàng
+					if(resp.stock > 0 && resp.stock <=5){
+						$('.product_description .stock_status').html("Chỉ còn " + resp.stock + " sản phẩm");
+						$(".stock_status").show();
+					}else{
+						$(".stock_status").hide();
 					}
 				}, error: function(){
 					alert("Error");

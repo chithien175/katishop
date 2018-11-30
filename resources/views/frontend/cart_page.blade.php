@@ -43,6 +43,11 @@
                                     <div class="seller-by mt-1">
                                             Cung cấp bởi <a href="javascript:void(0);">Katishop</a>
                                     </div>
+                                    @if($cart->attributes->stock > 0 && $cart->attributes->stock <=5)
+                                    <div class="stock_status mt-1">
+                                        Chỉ còn {{ $cart->attributes->stock }} sản phẩm
+                                    </div>
+                                    @endif
                                     <div class="action mt-1">
                                         <a class="del-cart" href="javascript:void(0);" data-item-id="{{ $cart->id }}" data-item-quantity="{{ $cart->quantity }}">Xóa</a>
                                     </div>
