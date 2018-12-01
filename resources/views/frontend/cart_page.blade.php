@@ -75,7 +75,7 @@
                                             <span class="fas fa-minus"></span>
                                         </button>
                                     </span>
-                                    <input type="text" name="quant[{{$key}}]" class="form-control input-number" value="{{ $cart->quantity }}" min="1" max="99" data-item-id="{{ $cart->id }}">
+                                    <input type="text" name="quant[{{$key}}]" class="form-control input-number" value="{{ $cart->quantity }}" min="1" max="{{ $cart->attributes->stock }}" data-item-id="{{ $cart->id }}">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[{{$key}}]">
                                             <span class="fas fa-plus"></span>
@@ -90,8 +90,35 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-12 col-xs-12 order-lg-2">
-                <p>Tạm tính</p>
+            <div class="col-lg-3 col-sm-12 col-xs-12 order-lg-2 fee-box">
+                <div class="list-info-price mb-4">
+                    <span>Tạm tính:</span>
+                    <strong>{{ number_format($totalPrice, 0, ',', '.') }} ₫</strong>
+                </div>
+                <div class="list-info-price">
+                    <div class="text-left mt-2" style="float:left;">
+                        <span>Thành tiền:</span>
+                    </div>
+                    <div class="mb-4" style="float:right;">
+                        <div class="amount text-right">
+                            <strong>{{ number_format($totalPrice, 0, ',', '.') }} ₫</strong><br>
+                            <small>(Đã bao gồm VAT)</small>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-large btn-block btn-danger btn-checkout mb-4">Tiến hành đặt hàng</button>
+                <div class="coupon">
+                    <div class="text-left mb-2">
+                        <span>Mã giảm giá / Quà tặng</span>
+                    </div>
+                    <div class="input-group">
+                        <input id="coupon" placeholder="Nhập ở đây.." type="text" class="form-control" value="">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-coupon" type="button">Đồng ý</button>
+                        </span>
+                    </div>
+                    
+                </div>
             </div>
         </div>
         @endif

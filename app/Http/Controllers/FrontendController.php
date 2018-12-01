@@ -171,12 +171,21 @@ class FrontendController extends Controller
     public function getCart(){
         $session_id = Session::get('session_id');
         $userCart = Cart::where('session_id', $session_id)->get();
+        $totalPrice = 0;
         if($userCart->count() > 0){
+            foreach($userCart as $cart){
+                if($cart->attributes->stock == 0){
+                    $cart->quantity = 0;
+                    $cart->save();
+                }
+                $totalPrice += $cart->attributes->price*$cart->quantity;
+            }
             $totalItems = $userCart->sum('quantity');
+            
         }else{
             $totalItems = 0;
         }
         
-        return view('frontend.cart_page')->withUserCart($userCart)->withTotalItems($totalItems);
+        return view('frontend.cart_page')->withUserCart($userCart)->withTotalItems($totalItems)->withTotalPrice($totalPrice);
     }
 }

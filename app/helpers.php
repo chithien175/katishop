@@ -61,6 +61,11 @@ function totalItemInCart(){
     $session_id = Session::get('session_id');
     $carts = Cart::where('session_id', $session_id)->get();
     if($carts->count() > 0){
+        foreach($carts as $cart){
+            if($cart->attributes->stock == 0){
+                $cart->quantity = 0;
+            }
+        }
         return $carts->sum('quantity');
     }
     return 0;
@@ -72,6 +77,9 @@ function totalPriceInCart(){
     $total = 0;
     if($carts->count() > 0){
         foreach($carts as $cart){
+            if($cart->attributes->stock == 0){
+                $cart->quantity = 0;
+            }
             $total += $cart->attributes->price*$cart->quantity;
         }
         return $total;
