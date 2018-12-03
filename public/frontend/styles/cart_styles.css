@@ -160,6 +160,9 @@
 	font-size: 14px;
 	color: #333;
 }
+.btn-checkout{
+	cursor: pointer;
+}
 .coupon .btn-coupon{
 	background: #fdd835;
     font-size: 12px;
@@ -171,7 +174,8 @@
     transition: all .5s linear;
     border-radius: 0 3px 3px 0;
     font-weight: 500;
-    margin: 0;
+	margin: 0;
+	cursor: pointer;
 }
 .coupon .form-control{
 	font-size: 14px;

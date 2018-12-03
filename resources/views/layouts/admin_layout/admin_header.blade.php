@@ -59,8 +59,9 @@
                         <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('category.create') }}"><i class="mdi mdi-tag-multiple"></i> Danh mục</a>
-                        <a class="dropdown-item" href="{{ route('product.create') }}"><i class="mdi mdi-shopping"></i> Sản phẩm</a>
+                        <a class="dropdown-item" href="{{ route('category.create') }}"><i class="mdi mdi-tag-multiple orange"></i> Danh mục</a>
+                        <a class="dropdown-item" href="{{ route('product.create') }}"><i class="mdi mdi-shopping purple"></i> Sản phẩm</a>
+                        <a class="dropdown-item" href="{{ route('coupon.create') }}"><i class="mdi mdi-sale yellow"></i> Mã giảm giá</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->
