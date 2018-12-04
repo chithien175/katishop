@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Product;
 use App\Category;
-
+use App\Coupon;
 
 class AdminController extends Controller
 {
@@ -31,7 +31,11 @@ class AdminController extends Controller
     public function dashboard(){
         $total_products = Product::all()->count();
         $total_categories = Category::all()->count();
-        return view('admin.dashboard')->withTotalProducts($total_products)->withTotalCategories($total_categories);
+        $total_coupons = Coupon::all()->count();
+        return view('admin.dashboard')
+            ->withTotalProducts($total_products)
+            ->withTotalCategories($total_categories)
+            ->withTotalCoupons($total_coupons);
     }
 
     public function settings(){

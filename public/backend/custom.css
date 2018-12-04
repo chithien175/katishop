@@ -29,6 +29,37 @@
     color: #6cb2eb !important;
 } 
 
+.bg-blue{
+    background-color: #3490dc !important;
+}
+.bg-indigo {
+    background-color: #6574cd !important;
+}
+.bg-purple{
+    background-color: #9561e2 !important;
+} 
+.bg-pink{
+    background-color: #f66D9b !important;
+} 
+.bg-red{
+    background-color: #e3342f !important;
+} 
+.bg-orange{
+    background-color: #f6993f !important;
+} 
+.bg-yellow{
+    background-color: #ffed4a !important;
+} 
+.bg-green{
+    background-color: #38c172 !important;
+} 
+.bg-teal{
+    background-color: #4dc0b5 !important;
+} 
+.bg-cyan{
+    background-color: #6cb2eb !important;
+} 
+
 /* Navbar Supported Content */
 #navbarSupportedContent .navbar-nav .dropdown .dropdown-menu .dropdown-item:hover{
     background-color: #54a4e0;

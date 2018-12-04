@@ -14,7 +14,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::all();
+        
+        return view('admin.coupons.list_coupon')->withCoupons($coupons);
     }
 
     /**

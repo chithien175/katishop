@@ -4,6 +4,7 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/select2/dist/css/select2.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 @endsection
 
 @section('content')
@@ -58,10 +59,10 @@
                         </div>
                         <div class="row mb-3 align-items-center">
                             <div class="col-lg-3 col-md-12">
-                                <span class="">Giá giảm</span>
+                                <span class="">Giá giảm / Tỉ lệ</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="coupon_amount" name="coupon_amount">
+                                <input type="number" min="0" class="form-control" id="coupon_amount" name="coupon_amount">
                             </div>
                         </div>
                         <div class="row mb-3 align-items-center">
@@ -70,8 +71,8 @@
                             </div>
                             <div class="col-lg-9 col-md-12">
                                 <select name="coupon_type" id="coupon_type" class="select2 form-control">
-                                    <option value="percentage">Tỉ lệ phần trăm</option>
-                                    <option value="fixed">Số tiền giảm giá</option>
+                                    <option value="percentage">Giảm phần trăm</option>
+                                    <option value="fixed">Giảm tiền</option>
                                 </select>
                             </div>
                         </div>
@@ -80,18 +81,13 @@
                                 <span class="">Thời hạn mã giảm giá</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="date" class="form-control" id="coupon_expiry_date" name="coupon_expiry_date">
+                                <input type="text" class="form-control" id="coupon_expiry_date" name="coupon_expiry_date" placeholder="yyyy/mm/dd">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Tạo mới</button>
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -105,6 +101,11 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Tạo mới</button>
                     </div>
                 </div>
             </div>
@@ -131,15 +132,25 @@
 @section('js')
     <script src="{{ asset('backend/assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script>
        $( document ).ready(function() {
+            $('#coupon_expiry_date').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                startDate: new Date(),
+                format: "yyyy/mm/dd"
+            });
+
             //***********************************
             //*  Validate form #add_coupon    *
             //***********************************
             $('#add_coupon').validate({
                 rules:{
                     coupon_code:{
-                        required: true
+                        required: true,
+                        minlength: 5,
+                        maxlength: 15
                     },
                     coupon_amount:{
                         required: true

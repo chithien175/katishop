@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout.admin_design')
 
-@section('title', 'Danh sách danh mục')
+@section('title', 'Danh sách mã giảm giá')
 
 @section('css')
 <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
@@ -15,12 +15,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title"><i class="mdi mdi-tag-multiple"></i> Danh Sách Danh Mục</h4>
+            <h4 class="page-title"><i class="mdi mdi-tag-multiple"></i> Danh Sách Mã Giảm Giá</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Bảng điều khiển</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Danh mục sản phẩm</li>
+                        <li class="breadcrumb-item active" aria-current="page">Mã giảm giá</li>
                     </ol>
                 </nav>
             </div>
@@ -47,51 +47,52 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="category_table" class="table table-striped table-bordered">
+                        <table id="coupon_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tên</th>
-                                    <th>Danh mục cha</th>
+                                    <th>Mã giảm giá</th>
+                                    <th>Giá giảm / Tỉ lệ</th>
+                                    <th>Loại giảm giá</th>
+                                    <th>Thời hạn</th>
                                     <th>Trạng thái</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
+                                    <th>Tác vụ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $stt = 1;
-                                @endphp
-                                @foreach($categories as $category)
+                                @foreach($coupons as $coupon)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->parent_id }}</td>
-                                    <td>{{ ($category->status == '1')?'Kích hoạt':'Vô hiệu hóa' }}</td>
+                                    <td>{{ $coupon->id }}</td>
+                                    <td>{{ $coupon->coupon_code }}</td>
+                                    @if($coupon->amount_type == 'fixed')
+                                        <td>{{ number_format($coupon->amount, 0, ",", ".") }} ₫</td>
+                                    @else
+                                        <td>{{ $coupon->amount }}%</td>
+                                    @endif
+                                    
+                                    <td>{{ ($coupon->amount_type == 'fixed')?'Giảm tiền':'Phần trăm' }}</td>
+                                    <td>{{ $coupon->expiry_date }}</td>
+                                    <td>{{ ($coupon->status == '1')?'Kích hoạt':'Vô hiệu hóa' }}</td>
                                     <td class="center">
-                                        <a class="btn btn-warning btn-xs" href="{{ route('category.edit', $category->id) }}"><i class="fas fa-edit"></i> Sửa</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('category.destroy', $category->id) }}" method="post">
+                                        <a class="btn btn-warning btn-xs mb-1" href="{{ route('coupon.edit', $coupon->id) }}"><i class="fas fa-edit"></i> Sửa</a>
+                                        <form action="{{ route('coupon.destroy', $coupon->id) }}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
-                                            <button type="button" class="btn btn-danger btn-xs delete-category"><i class="fas fa-trash-alt"></i> Xóa</button>
+                                            <button type="button" class="btn btn-danger btn-xs delete-coupon"><i class="fas fa-trash-alt"></i> Xóa</button>
                                         </form>
                                     </td>
                                 </tr>
-                                @php
-                                    $stt ++;
-                                @endphp
                                 @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tên</th>
-                                    <th>Danh mục cha</th>
+                                    <th>Mã giảm giá</th>
+                                    <th>Giá giảm / Tỉ lệ</th>
+                                    <th>Loại giảm giá</th>
+                                    <th>Thời hạn</th>
                                     <th>Trạng thái</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
+                                    <th>Tác vụ</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -125,34 +126,12 @@
         $( document ).ready(function() {
             
             /****************************************
-            *       Confirm delete category         *
-            ****************************************/
-            $('.delete-category').click(function(e){
-                e.preventDefault();
-                console.log('abc');
-                swal({
-                    title: "Bạn muốn xóa?",
-                    text: "Bạn sẽ không thể khôi phục lại danh mục này!",
-                    type: "warning",
-                    showCancelButton: true,
-                    cancelButtonText: "Không",
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Có, xóa ngay!",
-                    closeOnConfirm: false
-                    },
-                function(){
-                    $(e.target).closest('form').submit()
-                });
-            });
-
-            /****************************************
             *       Basic Table                     *
             ****************************************/
-            $('#category_table').DataTable({
+            $('#coupon_table').DataTable({
                 "order": [[ 0, "desc" ]],
                 "columnDefs": [
-                    { "orderable": false, "searchable": false, "targets": 4 },
-                    { "orderable": false, "searchable": false, "targets": 5 }
+                    { "orderable": false, "searchable": false, "targets": 6 }
                 ]
             });
         });
