@@ -124,7 +124,27 @@
     <script src="{{ asset('backend/assets/libs/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
     <script>
         $( document ).ready(function() {
-            
+            /****************************************
+            *       Confirm delete coupon         *
+            ****************************************/
+            $('.delete-coupon').click(function(e){
+                e.preventDefault();
+                // console.log('abc');
+                swal({
+                    title: "Bạn muốn xóa?",
+                    text: "Bạn sẽ không thể khôi phục lại danh mục này!",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "Không",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Có, xóa ngay!",
+                    closeOnConfirm: false
+                    },
+                function(){
+                    $(e.target).closest('form').submit()
+                });
+            });
+
             /****************************************
             *       Basic Table                     *
             ****************************************/

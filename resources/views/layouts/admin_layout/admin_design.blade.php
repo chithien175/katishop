@@ -11,8 +11,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/assets/images/favicon.png') }}">
     <title>@yield('title') - KaTiShop</title>
-    <!-- Custom CSS -->
+    <!-- chart CSS -->
     <link href="{{ asset('backend/assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
+    <!-- Pace CSS -->
+    <link href="{{ asset('backend/assets/libs/pace/pace.css') }}" rel="stylesheet">
     <!-- Admin CSS -->
     <link href="{{ asset('backend/dist/css/style.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -71,6 +73,8 @@
     <script src="{{ asset('backend/dist/js/waves.js') }}"></script>
     <!--Menu sidebar -->
     <script src="{{ asset('backend/dist/js/sidebarmenu.js') }}"></script>
+    <!-- Pacejs -->
+    <script src="{{ asset('backend/assets/libs/pace/pace.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('backend/dist/js/custom.min.js') }}"></script>
 

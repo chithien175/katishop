@@ -91,12 +91,6 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Cập nhật</button>
-                        <a class="btn btn-secondary" href="javascript:history.back()"><i class="fas fa-undo"></i> Trở lại</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-md-12 mb-2">
                                 <span class="">Trạng thái</span>
@@ -108,6 +102,12 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Cập nhật</button>
+                        <a class="btn btn-secondary" href="javascript:history.back()"><i class="fas fa-undo"></i> Trở lại</a>
                     </div>
                 </div>
             </div>

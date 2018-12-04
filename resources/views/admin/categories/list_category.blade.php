@@ -54,8 +54,7 @@
                                     <th>Tên</th>
                                     <th>Danh mục cha</th>
                                     <th>Trạng thái</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
+                                    <th>Tác vụ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,9 +68,7 @@
                                     <td>{{ $category->parent_id }}</td>
                                     <td>{{ ($category->status == '1')?'Kích hoạt':'Vô hiệu hóa' }}</td>
                                     <td class="center">
-                                        <a class="btn btn-warning btn-xs" href="{{ route('category.edit', $category->id) }}"><i class="fas fa-edit"></i> Sửa</a>
-                                    </td>
-                                    <td>
+                                        <a class="btn btn-warning btn-xs mb-1" href="{{ route('category.edit', $category->id) }}"><i class="fas fa-edit"></i> Sửa</a>
                                         <form action="{{ route('category.destroy', $category->id) }}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
@@ -90,8 +87,7 @@
                                     <th>Tên</th>
                                     <th>Danh mục cha</th>
                                     <th>Trạng thái</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
+                                    <th>Tác vụ</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -129,7 +125,7 @@
             ****************************************/
             $('.delete-category').click(function(e){
                 e.preventDefault();
-                console.log('abc');
+                // console.log('abc');
                 swal({
                     title: "Bạn muốn xóa?",
                     text: "Bạn sẽ không thể khôi phục lại danh mục này!",
@@ -151,8 +147,7 @@
             $('#category_table').DataTable({
                 "order": [[ 0, "desc" ]],
                 "columnDefs": [
-                    { "orderable": false, "searchable": false, "targets": 4 },
-                    { "orderable": false, "searchable": false, "targets": 5 }
+                    { "orderable": false, "searchable": false, "targets": 4 }
                 ]
             });
         });

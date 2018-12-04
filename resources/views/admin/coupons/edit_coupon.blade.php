@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout.admin_design')
 
-@section('title', 'Thêm mã giảm giá')
+@section('title', 'Sửa mã giảm giá')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/select2/dist/css/select2.min.css') }}">
@@ -14,7 +14,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title"><i class="mdi mdi-tag-multiple"></i> Thêm Mới Mã Giảm Giá</h4>
+            <h4 class="page-title"><i class="mdi mdi-tag-multiple"></i> Chỉnh Sửa Mã Giảm Giá</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -50,8 +50,9 @@
     </div>
     @endif
 
-    <form class="form-horizontal" action="{{ route('coupon.store') }}" method="post" name="add_coupon" id="add_coupon">
+    <form class="form-horizontal" action="{{ route('coupon.update', $coupon->id) }}" method="post" name="add_coupon" id="add_coupon">
         @csrf
+        <input name="_method" type="hidden" value="PUT">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
@@ -61,7 +62,7 @@
                                 <span class="">Mã giảm giá</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="coupon_code" name="coupon_code">
+                                <input type="text" class="form-control" id="coupon_code" name="coupon_code" value="{{ $coupon->coupon_code }}">
                             </div>
                         </div>
                         <div class="row mb-3 align-items-center">
@@ -69,7 +70,7 @@
                                 <span class="">Giá giảm / Tỉ lệ</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="number" min="0" class="form-control" id="coupon_amount" name="coupon_amount">
+                                <input type="number" min="0" class="form-control" id="coupon_amount" name="coupon_amount" value="{{ $coupon->amount }}">
                             </div>
                         </div>
                         <div class="row mb-3 align-items-center">
@@ -78,8 +79,8 @@
                             </div>
                             <div class="col-lg-9 col-md-12">
                                 <select name="coupon_type" id="coupon_type" class="select2 form-control">
-                                    <option value="percentage">Giảm phần trăm</option>
-                                    <option value="fixed">Giảm tiền</option>
+                                    <option {{ ($coupon->amount_type == 'percentage')?'selected':'' }} value="percentage">Giảm phần trăm</option>
+                                    <option {{ ($coupon->amount_type == 'fixed')?'selected':'' }} value="fixed">Giảm tiền</option>
                                 </select>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                                 <span class="">Thời hạn mã giảm giá</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="coupon_expiry_date" name="coupon_expiry_date" placeholder="yyyy/mm/dd">
+                                <input type="text" class="form-control" id="coupon_expiry_date" name="coupon_expiry_date" value="{{ $coupon->expiry_date }}">
                             </div>
                         </div>
                     </div>
@@ -103,8 +104,8 @@
                             </div>
                             <div class="col-lg-12 col-md-12">
                                 <select name="coupon_status" id="coupon_status" class="select2 form-control">
-                                    <option value="1">Kích hoạt</option>
-                                    <option value="0">Vô hiệu hóa</option>
+                                    <option {{ ($coupon->status == 1)?'selected':'' }} value="1">Kích hoạt</option>
+                                    <option {{ ($coupon->status == 0)?'selected':'' }} value="0">Vô hiệu hóa</option>
                                 </select>
                             </div>
                         </div>
@@ -112,7 +113,8 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Tạo mới</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Cập nhật</button>
+                        <a class="btn btn-secondary" href="javascript:history.back()"><i class="fas fa-undo"></i> Trở lại</a>
                     </div>
                 </div>
             </div>

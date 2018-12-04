@@ -37,6 +37,12 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'coupon_code' => 'unique:coupons'
+        ],[
+            'coupon_code.unique' => 'Mã giảm giá đã tồn tại'
+        ]);
+
         $coupon = new Coupon;
         $coupon->coupon_code = $request->coupon_code;
         $coupon->amount = $request->coupon_amount;
@@ -66,7 +72,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        //
+        $coupon = Coupon::findOrFail($id);
+        return view('admin.coupons.edit_coupon')->withCoupon($coupon);
     }
 
     /**
@@ -78,7 +85,21 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $coupon = Coupon::findOrFail($id);
+
+        $request->validate([
+            'coupon_code' => 'unique:coupons,coupon_code,'.$coupon->id
+        ],[
+            'coupon_code.unique' => 'Mã giảm giá đã tồn tại'
+        ]);
+        
+        $coupon->coupon_code = $request->coupon_code;
+        $coupon->amount = $request->coupon_amount;
+        $coupon->amount_type = $request->coupon_type;
+        $coupon->expiry_date = $request->coupon_expiry_date;
+        $coupon->status = $request->coupon_status;
+        $coupon->save();
+        return redirect()->route('coupon.index')->with('flash_message_success', 'Chỉnh sửa mã giảm giá thành công!');
     }
 
     /**
@@ -89,6 +110,8 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $coupon = Coupon::findOrFail($id);
+        $coupon->delete();
+        return redirect()->route('coupon.index')->with('flash_message_success', 'Xóa mã giảm giá thành công!');
     }
 }
