@@ -7,13 +7,13 @@
 - [Laravel 5.7](https://laravel.com/docs/5.7)
 
 ## Tính năng
-# Quản trị
+### Quản trị
 - Đăng nhập, đổi mật khẩu
 - Quản lý danh mục sản phẩm
 - Quản lý sản phẩm - thuộc tính sản phẩm, thư viện sản phẩm
 - Quản lý mã giảm giá
 - Đang cập nhật...
-# Người dùng
+### Người dùng
 - Trang chủ
 - Danh mục (Xem sản phẩm theo danh mục sản phẩm)
 - Giỏ hàng (Thêm sản phẩm vào giỏ hàng)
