@@ -147,7 +147,6 @@
             $('#coupon_expiry_date').datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                startDate: new Date(),
                 format: "yyyy/mm/dd"
             });
 

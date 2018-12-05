@@ -71,11 +71,14 @@ Route::get('/get-attribute', 'FrontendController@getProductAttribute')->name('ge
 // Add Item to card
 Route::post('/cart/add-item', 'FrontendController@postAddItem')->name('post.add_item');
 
-// Delete item from card
+// Delete item to card
 Route::post('/cart/del-item', 'FrontendController@postDelItem')->name('post.del_item');
 
 // Update quantity to card
 Route::post('/cart/update-quantity', 'FrontendController@postUpdateQuantity')->name('post.update_quantity');
+
+// Apply Coupon Cart
+Route::post('/cart/apply-coupon', 'FrontendController@postApplyCoupon')->name('post.apply_coupon');
 
 // Card route (Frontend)
 Route::get('/cart.html', 'FrontendController@getCart')->name('get.cart');

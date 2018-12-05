@@ -8,6 +8,7 @@ use App\Product;
 use App\Category;
 use App\ProductAttribute;
 use App\Cart;
+use App\Coupon;
 
 class FrontendController extends Controller
 {
@@ -96,6 +97,10 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function postAddItem(Request $request){
+        // Forget Coupon Code & Amount in Session
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+
         $session_id = Session::get('session_id');
         if(empty($session_id)){
             $session_id = str_random(40);
@@ -133,6 +138,10 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function postDelItem(Request $request){
+        // Forget Coupon Code & Amount in Session
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+
         $cart = Cart::findOrFail($request['id']);
         if($cart->delete()){
             return response()->json(['status'=> 1]);
@@ -145,6 +154,10 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function postUpdateQuantity(Request $request){
+        // Forget Coupon Code & Amount in Session
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+
         $cart = Cart::findOrFail($request['id']);
         if($request['action'] == 'plus'){
             $cart->quantity = $cart->quantity + $request['quantity'];
@@ -160,6 +173,45 @@ class FrontendController extends Controller
             $cart->quantity = $request['quantity'];
             $cart->save();
             return response()->json(['status'=> 1]);
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | POST Apply Coupon Cart
+    |--------------------------------------------------------------------------
+    */
+    public function postApplyCoupon(Request $request){
+        // Forget Coupon Code & Amount in Session
+        Session::forget('CouponAmount');
+        Session::forget('CouponCode');
+
+        $coupon = Coupon::where('coupon_code', $request['coupon_code'])->first();
+        $current_date = date('Y-m-d');
+        // Kiểm tra coupon có tồn tại không || coupon có vô hiệu hóa không? || coupon có hết hạn không?
+        if(!$coupon || $coupon->status == 0 || $coupon->expiry_date < $current_date){
+            return redirect()->back()->with('flash_message_error', 'Mã giảm giá "'.$request['coupon_code'].'" không hợp lệ (chương trình khuyến mãi tương ứng không tồn tại)');
+        }else{
+            // Get Tổng tiền trong giỏ hàng
+            $session_id = Session::get('session_id');
+            $userCart = Cart::where('session_id', $session_id)->get();
+            $total_amount = 0;
+            foreach($userCart as $cart){
+                $total_amount += $cart->attributes->price*$cart->quantity;
+            }
+
+            // Kiểm tra amount_type
+            if($coupon->amount_type == 'fixed'){
+                $couponAmount = $coupon->amount;
+            }else{
+                $couponAmount = $total_amount * ($coupon->amount/100);
+            }
+
+            // Add Coupon Code & Amount in Session
+            Session::put('CouponAmount', $couponAmount);
+            Session::put('CouponCode', $request['coupon_code']);
+
+            return redirect()->back()->with('flash_message_success', 'Áp dụng mã giảm giá thành công!');
         }
     }
 

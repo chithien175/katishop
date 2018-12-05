@@ -95,13 +95,27 @@
                     <span>Tạm tính:</span>
                     <strong>{{ number_format($totalPrice, 0, ',', '.') }} ₫</strong>
                 </div>
+                @php
+                    $st_coupon_amount = Session::get('CouponAmount');
+                    $st_coupon_code = Session::get('CouponCode');
+                @endphp
+                @if(!empty($st_coupon_amount))
+                <div class="list-info-price mb-4">
+                    <span>Giảm giá:</span>
+                    <strong>- {{ number_format($st_coupon_amount, 0, ',', '.') }} ₫</strong>
+                </div>
+                @endif
                 <div class="list-info-price">
                     <div class="text-left mt-2" style="float:left;">
                         <span>Thành tiền:</span>
                     </div>
                     <div class="mb-4" style="float:right;">
                         <div class="amount text-right">
+                        @if(!empty($st_coupon_amount))
+                            <strong>{{ number_format($totalPrice - $st_coupon_amount, 0, ',', '.') }} ₫</strong><br>
+                        @else
                             <strong>{{ number_format($totalPrice, 0, ',', '.') }} ₫</strong><br>
+                        @endif
                             <small>(Đã bao gồm VAT)</small>
                         </div>
                     </div>
@@ -111,13 +125,24 @@
                     <div class="text-left mb-2">
                         <span>Mã giảm giá / Quà tặng</span>
                     </div>
-                    <div class="input-group">
-                        <input id="coupon" placeholder="Nhập ở đây.." type="text" class="form-control" value="">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-coupon" type="button">Đồng ý</button>
-                        </span>
-                    </div>
-                    
+                    <form class="mb-3" action="{{ route('post.apply_coupon') }}" method="post">
+                        @csrf()
+                        <div class="input-group">
+                            <input id="coupon_code" name="coupon_code" placeholder="Nhập ở đây.." type="text" class="form-control" value="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-coupon" type="submit">Đồng ý</button>
+                            </span>
+                        </div>
+                    </form>
+                    @if(!empty($st_coupon_amount))
+                    <span class="label label-success gift-card-item">
+                        <span class="coupon-disc">{{ $st_coupon_code }}</span>
+                        <button type="button" class="btn btn-default btn-remove-coupon"><i class="fa fa-times"></i></button>
+                    </span>
+                    <p class="note-coupon">
+                        <b>Lưu ý:</b> Mỗi giỏ hàng chỉ được áp dụng 1 mã giảm giá.
+                    </p>
+                    @endif
                 </div>
             </div>
         </div>
