@@ -226,8 +226,14 @@ class FrontendController extends Controller
         $totalPrice = 0;
         if($userCart->count() > 0){
             foreach($userCart as $cart){
+                // Kiểm tra nếu kho = 0
                 if($cart->attributes->stock == 0){
                     $cart->quantity = 0;
+                    $cart->save();
+                }
+                // Kiểm tra nếu kho < quantity
+                if($cart->attributes->stock < $cart->quantity){
+                    $cart->quantity = $cart->attributes->stock;
                     $cart->save();
                 }
                 $totalPrice += $cart->attributes->price*$cart->quantity;
