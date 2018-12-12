@@ -87,7 +87,7 @@
                         @csrf
                         <div class="dz-default dz-message">
                             <img src="{{ asset('/backend/assets/images/upload-icon.png') }}" alt="Upload file" width=50px;>
-                            <div>Thả hình vào đây để tải lên</div>
+                            <div>Thả hình (600x600 px) vào đây để tải lên</div>
                         </div>
                     </form>
                 </div>

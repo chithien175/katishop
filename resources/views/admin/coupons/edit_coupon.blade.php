@@ -50,7 +50,7 @@
     </div>
     @endif
 
-    <form class="form-horizontal" action="{{ route('coupon.update', $coupon->id) }}" method="post" name="add_coupon" id="add_coupon">
+    <form class="form-horizontal" action="{{ route('coupon.update', $coupon->id) }}" method="post" name="edit_coupon" id="edit_coupon">
         @csrf
         <input name="_method" type="hidden" value="PUT">
         <div class="row">
@@ -151,9 +151,9 @@
             });
 
             //***********************************
-            //*  Validate form #add_coupon    *
+            //*  Validate form #edit_coupon    *
             //***********************************
-            $('#add_coupon').validate({
+            $('#edit_coupon').validate({
                 rules:{
                     coupon_code:{
                         required: true,

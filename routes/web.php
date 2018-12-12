@@ -34,6 +34,9 @@ Route::prefix('/system-cpanel')->middleware('auth')->group(function () {
     // Coupons Routes (Admin)
     Route::resource('coupon', 'CouponController');
 
+    // Banners Routes (Admin)
+    Route::resource('banner', 'BannerController');
+
     // Products Routes (Admin)
     Route::resource('product', 'ProductController');
     Route::get('ajaxGetProducts', 'AjaxDataController@ajaxGetProducts')->name('ajax.getProducts');

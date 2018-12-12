@@ -2,7 +2,9 @@
 use App\Category;
 use App\Product;
 use App\Cart;
+use App\Banner;
 
+// Đệ quy danh mục
 function dequyCategories($data,$parent=0){
     if(isset($data[$parent])){
         if($parent == 0){
@@ -29,26 +31,34 @@ function dequyCategories($data,$parent=0){
     }
 }
 
+// Render Đệ quy danh mục
 function renderCategories(){
-    $cagegories = Category::where('status', '1')->get()->toArray();
+    $cagegories = Category::where('status', '1')->get();
 
-    foreach($cagegories as $category){
-        $pa=$category['parent_id'];
-        $new_category[$pa][]=$category;
+    if($cagegories->count() > 0){
+        foreach($cagegories->toArray() as $category){
+            $pa=$category['parent_id'];
+            $new_category[$pa][]=$category;
+        }
+    
+        dequyCategories($new_category, 0);
     }
 
-    dequyCategories($new_category, 0);
+    return false;
 }
 
+// Render link chi tiết sản phẩm
 function renderProductDetailLink($slug, $id){
     $link = route('get.product_detail', ['slug'=>$slug,'id'=>$id]);
     return $link;
 }
 
+// Đếm số sản phẩm theo danh mục
 function countProductsByCategoryId($category_id){
     return Product::where('category_id', $category_id)->count();
 }
 
+// Phần trăm giảm giá
 function ratioDiscountCalculator($price, $price_regular){
     if($price<$price_regular){
         $ratio = ($price_regular-$price)*100/$price_regular;
@@ -57,6 +67,7 @@ function ratioDiscountCalculator($price, $price_regular){
     return 0;
 }
 
+// Tổng item trong giỏ hàng
 function totalItemInCart(){
     $session_id = Session::get('session_id');
     $carts = Cart::where('session_id', $session_id)->get();
@@ -71,6 +82,7 @@ function totalItemInCart(){
     return 0;
 }
 
+// Tổng giá trong giỏ hàng
 function totalPriceInCart(){
     $session_id = Session::get('session_id');
     $carts = Cart::where('session_id', $session_id)->get();
@@ -85,4 +97,11 @@ function totalPriceInCart(){
         return $total;
     }
     return $total;
+}
+
+// Lấy danh sách banner
+function getAllBanners($status = 1){
+    $banners = Banner::where('status', $status)->get();
+
+    return $banners;
 }

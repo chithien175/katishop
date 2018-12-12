@@ -117,7 +117,7 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-md-12 mb-2">
-                                <span class="">Ảnh sản phẩm</span>
+                                <span class="">Ảnh sản phẩm (600x600 px)</span>
                             </div>
                             <div class="col-lg-12 col-md-12">
                             @if(file_exists('images/products/small/'.$product->image))

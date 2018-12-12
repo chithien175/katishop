@@ -1270,8 +1270,8 @@ select option
 .banner_product_image
 {
 	position: absolute;
-	top: -5px;
-	right: -52px;
+	top: 40px;
+	right: 30px;
 	z-index: 0;
 }
 
@@ -2212,7 +2212,7 @@ select option
 {
 	position: absolute;
 	bottom: 40px;
-	left: calc((100% - 1170px) / 2 + 15px);
+	right: calc((100% - 1170px) / 2 + 15px);
 	z-index: 1000000;
 }
 .banner_2_dots .owl-dot

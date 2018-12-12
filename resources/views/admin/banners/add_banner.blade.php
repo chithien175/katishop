@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout.admin_design')
 
-@section('title', 'Thêm sản phẩm')
+@section('title', 'Thêm banner')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/select2/dist/css/select2.min.css') }}">
@@ -13,12 +13,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title"><i class="mdi mdi-shopping"></i> Thêm Mới Sản Phẩm</h4>
+            <h4 class="page-title"><i class="mdi mdi-shopping"></i> Thêm Mới Banner</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Bảng điều khiển</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                        <li class="breadcrumb-item active" aria-current="page">Banner</li>
                     </ol>
                 </nav>
             </div>
@@ -40,7 +40,7 @@
             @include('layouts.admin_layout.admin_flash_message')
         </div>
     </div>
-    <form class="form-horizontal" action="{{ route('product.store') }}" method="post" name="add_product" id="add_product" enctype="multipart/form-data">
+    <form class="form-horizontal" action="{{ route('banner.store') }}" method="post" name="add_banner" id="add_banner" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-9">
@@ -48,50 +48,26 @@
                     <div class="card-body">
                         <div class="row mb-3 align-items-center">
                             <div class="col-lg-3 col-md-12">
-                                <span class="">Mã sản phẩm</span>
+                                <span class="">Tiêu đề</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="product_code" name="product_code">
+                                <input type="text" class="form-control" id="banner_title" name="banner_title">
                             </div>
                         </div>
                         <div class="row mb-3 align-items-center">
                             <div class="col-lg-3 col-md-12">
-                                <span class="">Tên sản phẩm</span>
+                                <span class="">Mô tả</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="product_name" name="product_name">
+                                <textarea class="form-control" id="banner_des" name="banner_des" rows="5"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3 align-items-center">
                             <div class="col-lg-3 col-md-12">
-                                <span class="">Slug</span>
+                                <span class="">Liên kết</span>
                             </div>
                             <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="product_url" name="product_url">
-                            </div>
-                        </div>
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-lg-3 col-md-12">
-                                <span class="">Mô tả ngắn</span>
-                            </div>
-                            <div class="col-lg-9 col-md-12">
-                                <textarea class="form-control" id="product_description" name="product_description" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-lg-3 col-md-12">
-                                <span class="">Thông tin chi tiết</span>
-                            </div>
-                            <div class="col-lg-9 col-md-12">
-                                <textarea class="form-control" id="product_info" name="product_info" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-lg-3 col-md-12">
-                                <span class="">Giá thị trường</span>
-                            </div>
-                            <div class="col-lg-9 col-md-12">
-                                <input type="text" class="form-control" id="product_price" name="product_price">
+                                <input type="text" class="form-control" id="banner_link" name="banner_link">
                             </div>
                         </div>
                     </div>
@@ -102,24 +78,10 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-md-12 mb-2">
-                                <span class="">Danh mục</span>
+                                <span class="">Ảnh banner (500x500 px)</span>
                             </div>
                             <div class="col-lg-12 col-md-12">
-                                <select name="category_id" id="category_id" class="select2 form-control">
-                                    {!! $categoriesDropdown !!}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12 col-md-12 mb-2">
-                                <span class="">Ảnh sản phẩm (600x600 px)</span>
-                            </div>
-                            <div class="col-lg-12 col-md-12">
-                                <input type="file" class="form-control" name="product_image">
+                                <input type="file" class="form-control" name="banner_image">
                             </div>
                         </div>
                     </div>
@@ -131,7 +93,7 @@
                                 <span class="">Trạng thái</span>
                             </div>
                             <div class="col-lg-12 col-md-12">
-                                <select name="product_status" id="product_status" class="select2 form-control">
+                                <select name="banner_status" id="banner_status" class="select2 form-control">
                                     <option value="1">Kích hoạt</option>
                                     <option value="0">Vô hiệu hóa</option>
                                 </select>
@@ -165,7 +127,6 @@
 @endsection
 
 @section('js')
-    
     <script src="{{ asset('backend/assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/jquery-validation/dist/additional-methods.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/select2/dist/js/select2.min.js') }}"></script>
@@ -177,30 +138,14 @@
             $(".select2").select2();
 
             //***********************************
-            //*  Validate form #add_product    *
+            //*  Validate form #add_banner    *
             //***********************************
-            $('#add_product').validate({
+            $('#add_banner').validate({
                 rules:{
-                    product_code:{
+                    banner_title:{
                         required: true
                     },
-                    product_name:{
-                        required: true
-                    },
-                    product_url:{
-                        required: true
-                    },
-                    product_description:{
-                        required: true
-                    },
-                    product_info:{
-                        required: true
-                    },
-                    product_price:{
-                        required: true,
-                        number: true
-                    },
-                    product_image:{
+                    banner_image:{
                         required: true,
                         extension: "jpg,jpeg,png"
                     }

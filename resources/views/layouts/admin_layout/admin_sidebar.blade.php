@@ -26,6 +26,12 @@
                         <li class="sidebar-item"><a href="{{ route('coupon.index') }}" class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu"> Xem tất cả </span></a></li>
                     </ul>
                 </li>
+                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Banners </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level">
+                        <li class="sidebar-item"><a href="{{ route('banner.create') }}" class="sidebar-link"><i class="mdi mdi-library-plus"></i><span class="hide-menu"> Thêm mới </span></a></li>
+                        <li class="sidebar-item"><a href="{{ route('banner.index') }}" class="sidebar-link"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu"> Xem tất cả </span></a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
