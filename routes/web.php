@@ -84,4 +84,12 @@ Route::post('/cart/update-quantity', 'FrontendController@postUpdateQuantity')->n
 Route::post('/cart/apply-coupon', 'FrontendController@postApplyCoupon')->name('post.apply_coupon');
 
 // Card route (Frontend)
-Route::get('/cart.html', 'FrontendController@getCart')->name('get.cart');
+Route::get('/gio-hang.html', 'FrontendController@getCart')->name('get.cart');
+
+// User Register
+Route::get('dang-ky.html', 'UserController@getUserRegister')->name('get.user_register');
+Route::post('dang-ky.html', 'UserController@postUserRegister')->name('post.user_register');
+
+// User Login
+Route::get('dang-nhap.html', 'UserController@getUserLogin')->name('get.user_login');
+Route::post('dang-nhap.html', 'UserController@postUserLogin')->name('post.user_login');

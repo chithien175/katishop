@@ -1,0 +1,19 @@
+#register_form{
+    padding: 20px;
+    background-color: #fff;
+}
+
+#register_form input{
+    font-size: 14px;
+    color: #333333;
+}
+
+#login_form{
+    padding: 20px;
+    background-color: #fff;
+}
+
+#login_form input{
+    font-size: 14px;
+    color: #333333;
+}
