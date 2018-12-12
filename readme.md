@@ -12,12 +12,12 @@
 - Quản lý danh mục sản phẩm
 - Quản lý sản phẩm - thuộc tính sản phẩm, thư viện sản phẩm
 - Quản lý mã giảm giá
+- Quản lý banner trang chủ
 - Đang cập nhật...
 ### Người dùng
-- Trang chủ
-- Danh mục (Xem sản phẩm theo danh mục sản phẩm)
-- Giỏ hàng (Thêm sản phẩm vào giỏ hàng)
-- Mã giảm giá (Áp dụng mã giảm giá cho giỏ hàng)
+- Trang chủ (Banner slider, Danh sách danh mục, Danh sách sản phẩm)
+- Trang danh mục (Xem sản phẩm theo danh mục sản phẩm)
+- Trang giỏ hàng (Thêm sản phẩm vào giỏ hàng, Áp dụng mã giảm giá)
 - Đang cập nhật...
 
 ## Cài đặt
