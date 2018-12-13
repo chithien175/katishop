@@ -30,6 +30,7 @@
 - cập nhật file .env (APP_URL, DB_DATABASE, DB_USER, DB_PASSWORD)
 - php artisan key:generate
 - php artisan migrate
+Lưu ý: Nếu không muốn tạo dữ liệu mẫu, vào tập tin database/seeds/DatabaseSeeder.php, trừ bảng User thì comment code các bảng còn lại
 - php artisan db:seed
 
 ## Bắt đầu
