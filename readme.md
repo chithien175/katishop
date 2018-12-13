@@ -2,6 +2,7 @@
 - Xây dựng webite thương mại điện tử bằng Laravel.
 - Quản trị nội dung, danh mục sản phẩm, sản phẩm, ...
 - Hướng tới trải nghiệm người dùng, giao diện người dùng đẹp.
+- Ngôn ngữ tiếng Việt - dành cho người Việt :)
 
 ## Yêu cầu
 - [Laravel 5.7](https://laravel.com/docs/5.7).
