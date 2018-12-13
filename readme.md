@@ -36,4 +36,4 @@
 ## Bắt đầu
 - php artisan serve
 - chạy url http://localhost:8000
-- và dùng thưởng thức nào...!
+- và cùng thưởng thức nào...!
