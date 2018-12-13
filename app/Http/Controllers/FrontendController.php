@@ -225,7 +225,12 @@ class FrontendController extends Controller
         $userCart = Cart::where('session_id', $session_id)->get();
         $totalPrice = 0;
         if($userCart->count() > 0){
-            foreach($userCart as $cart){
+            foreach($userCart as $key => $cart){
+                // Kiểm tra nếu sản phẩm có status == 0 thì xóa khỏi giỏ hàng
+                if($cart->products->status == 0){
+                    $cart->delete();
+                    unset($userCart[$key]);
+                }
                 // Kiểm tra nếu kho = 0
                 if($cart->attributes->stock == 0){
                     $cart->quantity = 0;

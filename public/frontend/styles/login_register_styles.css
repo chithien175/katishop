@@ -1,19 +1,13 @@
-#register_form{
+#register_form, #login_form{
     padding: 20px;
     background-color: #fff;
 }
 
-#register_form input{
+#register_form input, #login_form input{
     font-size: 14px;
     color: #333333;
 }
 
-#login_form{
-    padding: 20px;
-    background-color: #fff;
-}
-
-#login_form input{
-    font-size: 14px;
-    color: #333333;
+#register_form button, #login_form button{
+    cursor: pointer;
 }

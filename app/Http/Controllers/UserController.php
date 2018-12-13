@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UserController extends Controller
 {
@@ -11,6 +12,10 @@ class UserController extends Controller
     }
 
     public function postUserRegister(Request $request){
+        $user = User::where('email', $request['email'])->first();
+        if($user){
+            return redirect()->back()->with('flash_message_error', 'Địa chỉ email đã được sử dụng.');
+        }
         return $request->all();
     }
 
