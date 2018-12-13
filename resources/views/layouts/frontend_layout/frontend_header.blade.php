@@ -24,9 +24,15 @@
                             </ul>
                         </div>
                         <div class="top_bar_user">
-                            <div class="user_icon"><img src="{{ asset('frontend/images/user.svg') }}" alt=""></div>
-                            <div><a href="{{ route('get.user_register') }}">Tạo tài khoản</a></div>
-                            <div><a href="{{ route('get.user_login') }}">Đăng nhập</a></div>
+                            @if(empty(Auth::check()))
+                            <div class="user_icon"></div>
+                            <div><a href="{{ route('get.user_register') }}"><i class="fas fa-user"></i> Tạo tài khoản</a></div>
+                            <div><a href="{{ route('get.user_login') }}"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></div>
+                            @else
+                            <div class="user_icon"></div>
+                            <div><a href="{{ route('get.user_account') }}"><i class="fas fa-user"></i> Tài khoản của tôi</a></div>
+                            <div><a href="{{ route('get.user_logout') }}"><i class="fas fa-power-off"></i> Thoát</a></div>
+                            @endif
                         </div>
                     </div>
                 </div>

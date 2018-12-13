@@ -36,7 +36,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu từ 6 đến 32 ký tự" required>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" name="cb_confirm" value="true" required>
+                        <input type="checkbox" id="cb_confirm" name="cb_confirm" value="true" checked>
                         <span>  
                             Nhận các thông tin và chương trình khuyến mãi của Katisoft qua email. Khi bạn nhấn Đăng ký, bạn đã đồng ý thực hiện mọi giao dịch mua bán theo <a href="#">điều kiện sử dụng và chính sách của Katisoft</a>.
                         </span>
@@ -61,8 +61,7 @@
             rules:{
                 fullname:{
                     required: true,
-                    minlength: 2,
-                    accept: "[a-zA-Z]+"
+                    minlength: 2
                 },
                 phone:{
                     required: true,
@@ -70,7 +69,8 @@
                 },
                 email:{
                     required: true,
-                    email: true
+                    email: true,
+                    remote: "{{ route('get.check_email') }}"
                 },
                 password:{
                     required: true,
@@ -80,25 +80,25 @@
             },
             messages:{
                 fullname: {
-                    required: "Vui lòng nhập họ tên",
-                    minlength: "Họ tên phải tối đa 2 ký tự",
-                    accept: "Họ tên không bao gồm chữ số"
+                    required: "Vui lòng nhập họ tên.",
+                    minlength: "Họ tên phải tối đa 2 ký tự."
                 },
                 phone: {
-                    required: "Vui lòng nhập số điện thoại",
-                    number: "Định dạng số điện thoại không đúng"
-                },
-                password: {
-                    required: "Vui lòng nhập mật khẩu",
-                    minlength: "Mật khẩu phải ít nhất 6 ký tự",
-                    maxlength: "Mật khẩu tối đa 32 ký tự"
+                    required: "Vui lòng nhập số điện thoại.",
+                    number: "Định dạng số điện thoại không đúng."
                 },
                 email: {
-                    required: "Vui lòng nhập email",
-                    email: "Địa chỉ email không hợp lệ"
+                    required: "Vui lòng nhập email.",
+                    email: "Địa chỉ email không hợp lệ.",
+                    remote: "Địa chỉ email đã được sử dụng."
+                },
+                password: {
+                    required: "Vui lòng nhập mật khẩu.",
+                    minlength: "Mật khẩu phải ít nhất 6 ký tự.",
+                    maxlength: "Mật khẩu tối đa 32 ký tự."
                 }
             },
-            errorElement: "div"
+            errorElement: "span"
         });
     });
 </script>

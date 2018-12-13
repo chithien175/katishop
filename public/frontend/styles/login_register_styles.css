@@ -11,3 +11,7 @@
 #register_form button, #login_form button{
     cursor: pointer;
 }
+#fullname-error, #phone-error, #email-error, #password-error{
+    font-size: 11px;
+    color: #a94442;
+}

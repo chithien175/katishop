@@ -65,31 +65,38 @@ Route::get('/', 'FrontendController@homepage')->name('homepage');
 // Show products By Category route (Frontend)
 Route::get('/danh-muc/{slug}.html', 'FrontendController@getProductsByCategory')->name('get.products_by_category');
 
-// Show product detail
+// Show product detail (Frontend)
 Route::get('/{slug}-pid{id}.html', 'FrontendController@getProductDetail')->name('get.product_detail')->where(['slug' => '[a-zA-Z-0-9]+', 'id' => '[0-9]*']);
 
-// Get product attribute
+// Get product attribute (Frontend)
 Route::get('/get-attribute', 'FrontendController@getProductAttribute')->name('get.attribute');
 
-// Add Item to card
+// Add Item to card (Frontend)
 Route::post('/cart/add-item', 'FrontendController@postAddItem')->name('post.add_item');
 
-// Delete item to card
+// Delete item to card (Frontend)
 Route::post('/cart/del-item', 'FrontendController@postDelItem')->name('post.del_item');
 
-// Update quantity to card
+// Update quantity to card (Frontend)
 Route::post('/cart/update-quantity', 'FrontendController@postUpdateQuantity')->name('post.update_quantity');
 
-// Apply Coupon Cart
+// Apply Coupon Cart (Frontend)
 Route::post('/cart/apply-coupon', 'FrontendController@postApplyCoupon')->name('post.apply_coupon');
 
 // Card route (Frontend)
 Route::get('/gio-hang.html', 'FrontendController@getCart')->name('get.cart');
 
-// User Register
-Route::get('dang-ky.html', 'UserController@getUserRegister')->name('get.user_register');
-Route::post('dang-ky.html', 'UserController@postUserRegister')->name('post.user_register');
+// User Register (Frontend)
+Route::get('/dang-ky.html', 'UserController@getUserRegister')->name('get.user_register');
+Route::post('/dang-ky.html', 'UserController@postUserRegister')->name('post.user_register');
+Route::get('/check-email', 'UserController@getCheckEmail')->name('get.check_email');
 
-// User Login
-Route::get('dang-nhap.html', 'UserController@getUserLogin')->name('get.user_login');
-Route::post('dang-nhap.html', 'UserController@postUserLogin')->name('post.user_login');
+// User Login (Frontend)
+Route::get('/dang-nhap.html', 'UserController@getUserLogin')->name('get.user_login');
+Route::post('/dang-nhap.html', 'UserController@postUserLogin')->name('post.user_login');
+
+// User Logout (Frontend)
+Route::get('/dang-xuat', 'UserController@getUserLogout')->name('get.user_logout');
+
+// User Account (Frontend)
+Route::get('/tai-khoan-cua-toi.html', 'UserController@getUserAccount')->name('get.user_account');
