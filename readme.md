@@ -37,3 +37,7 @@
 - php artisan serve
 - chạy url http://localhost:8000
 - và cùng thưởng thức nào...!
+## Tài khoản admin (demo)
+- Admin: http://localhost:8000/system-cpanel
+- Tài khoản: webdepnhatrang@gmail.com
+- Mật khẩu: 123123
