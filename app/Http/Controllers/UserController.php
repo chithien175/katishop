@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use Session;
 
 class UserController extends Controller
 {
@@ -23,6 +24,7 @@ class UserController extends Controller
             $user->password = bcrypt($request['password']);
             $user->save();
             if(Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])){
+                Session::put('frontSession', $request['email']);
                 return redirect()->route('get.cart');
             }
         }
@@ -34,6 +36,7 @@ class UserController extends Controller
 
     public function postUserLogin(Request $request){
         if(Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])){
+            Session::put('frontSession', $request['email']);
             return redirect()->route('get.cart');
         }else{
             return redirect()->back()->with('flash_message_error', 'Đăng nhập không thành công! Email hoặc mật khẩu không đúng!');
@@ -51,6 +54,7 @@ class UserController extends Controller
 
     public function getUserLogout(){
         Auth::logout();
+        Session::forget('frontSession');
         return redirect()->route('homepage');
     }
 

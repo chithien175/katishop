@@ -22,7 +22,7 @@ Auth::routes();
 // Route::match(['get', 'post'], '/system-cpanel', 'AdminController@login');
 Route::get('/system-cpanel', 'AdminController@login')->name('get.login');
 Route::post('/system-cpanel', 'AdminController@postLogin')->name('post.login');
-Route::prefix('/system-cpanel')->middleware('auth')->group(function () {
+Route::prefix('/system-cpanel')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::get('/settings', 'AdminController@settings');
     Route::get('/check-pwd', 'AdminController@checkPass');
@@ -98,5 +98,9 @@ Route::post('/dang-nhap.html', 'UserController@postUserLogin')->name('post.user_
 // User Logout (Frontend)
 Route::get('/dang-xuat', 'UserController@getUserLogout')->name('get.user_logout');
 
-// User Account (Frontend)
-Route::get('/tai-khoan-cua-toi.html', 'UserController@getUserAccount')->name('get.user_account');
+// All route after login
+Route::group(['middleware'=>['frontlogin']], function(){
+    // User Account (Frontend)
+    Route::get('/tai-khoan-cua-toi.html', 'UserController@getUserAccount')->name('get.user_account');
+});
+
